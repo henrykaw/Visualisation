@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D3: Linear scale with scatterplot</title>
+        <script type="text/javascript" src="d3/d3.js"></script>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <ul class="navbar">
+            <li class="navBar"><a href="Index.html">Home</a></li>
+            <li><a href="Chap5.html">Chapter 5</a></li>
+            <li><a href="Chap6.html">Chapter 6</a></li>
+            <li><a href="chap7.html">Chapter 7</a></li>
+            <li class="active"><a href="chap8.html">Chapter 8</a></li>
+            <li><a href="#">Chapter 9</a></li>
+        </ul>
+        <ul class="htmlNavBar">
+            <li class="part"><a href="chap8-1.html">Scatter plot</a></li>
+            <li class="Active"><a href="chap8-2.html">Scatter plot random data</a></li>
+        </ul>
+        <script type="text/javascript">
+            //Width and height for canvas
+            var w = 500;
+            var h = 300;
+            //Padding to avoid clipping
+            var padding = 30;
+            //Scale for X
+            var xScale = d3.scale.linear()
+                .domain([0, d3.max(dataset, function(d){
+                    return d[0];})])
+                .range([padding, w - padding * 2]);
+            //Scale for Y
+            var yScale = d3.scale.linear()
+                .domain([0, d3.max(dataset, function(d){
+                    return d[1];})])
+                .range([h - padding, padding]);
+            //Scale for circle radius
+            var rScale = d3.scale.linear()
+                .domain([0, d3.max(dataset, function(d){ return d[1];})])
+                .range([3,7]);
+            //Title for next plot
+            d3.select("body").append("p").text("Scatter plot with random data");
+            //Creating dataset to test the flexibility
+            var dataset = [];
+            var numDataPoints = 50;
+            var xRange = Math.random() * 1000;
+            var yRange = Math.random() * 1000;
+            for (var i = 0; i < numDataPoints; i++) {
+                var newNumber1 = Math.floor(Math.random() * xRange);
+                var newNumber2 = Math.floor(Math.random() * yRange);
+                dataset.push([newNumber1, newNumber2]);
+            }
+                        //Scale for X
+            var xScale = d3.scale.linear()
+                .domain([0, d3.max(dataset, function(d){
+                    return d[0];})])
+                .range([padding, w - padding * 2]);
+            //Scale for Y
+            var yScale = d3.scale.linear()
+                .domain([0, d3.max(dataset, function(d){
+                    return d[1];})])
+                .range([h - padding, padding]);
+            //Scale for circle radius
+            var rScale = d3.scale.linear()
+                .domain([0, d3.max(dataset, function(d){ return d[1];})])
+                .range([3,7]);
+            //Define X axis
+            var xAxis = d3.svg.axis()
+                .scale(xScale)
+                .orient("bottom");
+            // Define Y axis
+            var yAxis = d3.svg.axis()
+                .scale(yScale)
+                .orient("left")
+                .ticks(5);
+            //Create SVG element
+			var svg = d3.select("body")
+						.append("svg")
+                        .attr({
+                            "width": w,
+                            "height": h
+                        });
+            
+            svg.selectAll("circle")
+			   .data(dataset)
+			   .enter()
+			   .append("circle")
+                .attr({
+                "cx": function(d){return xScale(d[0]);},
+                "cy": function(d){return yScale(d[1]);},
+                "r": function(d){return rScale(d[1])},
+                "fill": "teal"
+                });
+            //Create x axis and put it on top
+            svg.append("g")
+                .attr({
+                "class": "axis",
+                "transform": "translate(0," + (h - padding) + ")"
+                })
+                .call(xAxis)
+            //Create y axis
+            svg.append("g")
+                .attr({
+                "class": "axis",
+                "transform": "translate(" + padding + ", 0)"
+                })
+                .call(yAxis);
+        </script>
+    </body>
+</html>

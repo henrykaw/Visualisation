@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Page Template</title>
+        <script type="text/javascript" src="d3/d3.js"></script>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <div class="navcontainer">
+            <ul class="navbar">
+                <li><a href="Index.html">Home</a></li>
+                <li class="active"><a href="Chap5.html">Chapter 5</a></li>
+                <li><a href="Chap6.html">Chapter 6</a></li>
+                <li><a href="chap7.html">Chapter 7</a></li>
+                <li><a href="chap8.html">Chapter 8</a></li>
+                <li><a href="#">Chapter 9</a></li>
+            </ul>
+        </div>
+        <script type="text/javascript">
+            var dataset = [ 5, 10, 15, 20, 25 ];
+            d3.select("body").selectAll("p")
+                .data(dataset)
+                .enter()
+                .append("p")
+                .text(function(d) { return "I can count up to " + d; })
+                .style("color", function(d) {
+                    if (d > 15) {  //Setting a threshold of 15
+                        return "blue";
+                    } else {
+                        return "red";
+                    }
+                });
+        </script>
+        <svg width="400" height="300">
+            <rect x="0" y="220" width="80" height="80" fill="purple" opacity="1" stroke="gray" stroke-width="2"></rect>
+            <rect x="40" y="180" width="80" height="80" fill="green" opacity="0.9" stroke="gray" stroke-width="2"></rect>
+            <rect x="80" y="140" width="80" height="80" fill="cyan" opacity="0.6" stroke="gray" stroke-width="2"></rect>
+            <rect x="120" y="100" width="80" height="80" fill="red" opacity="0.3" stroke="gray" stroke-width="2"></rect>
+            <rect x="160" y="60" width="80" height="80" fill="yellow" opacity="0.1" stroke="gray" stroke-width="2"></rect>
+        </svg>
+    </body>
+</html>

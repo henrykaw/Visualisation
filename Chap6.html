@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Page Template</title>
+        <script type="text/javascript" src="d3/d3.js"></script>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <div class="navcontainer">
+            <ul class="navbar">
+                <li><a href="Index.html">Home</a></li>
+                <li><a href="Chap5.html">Chapter 5</a></li>
+                <li class="active"><a href="Chap6.html">Chapter 6</a></li>
+                <li><a href="chap7.html">Chapter 7</a></li>
+                <li><a href="chap8.html">Chapter 8</a></li>
+                <li><a href="#">Chapter 9</a></li>
+            </ul>
+        </div>
+        <script type="text/javascript">
+
+            var dataset1 = [];//Initialize empty array
+            for (var i = 0; i < 25; i++) {            //Loop 25 times
+                var newNumber = Math.floor(Math.random() * 30);//New random number (0-30)
+                dataset1.push(newNumber);//Add new number to array
+            }
+            d3.select("body").append("p").text("Random dataset bar chart.");
+            
+            d3.select("body").selectAll("div")
+                .data(dataset1)
+                .enter()
+                .append("div")
+                .attr("class", "bar")
+                .style("height", function(d) {
+                    var barHeight = d * 5; //scale up by a factor of 5.
+                    return barHeight + "px";
+            });
+            d3.select("body").append("p").text("Svg elements");
+            
+            var w = 500; //Width for svg
+            var h = 80;  //Height for svg
+            var dataset = [ 5, 10, 15, 20, 25 ];
+            
+            var svg = d3.select("body")
+                .append("svg")
+                .attr("width", w)
+                .attr("height", h);
+            
+            var circles = svg.selectAll("circle")
+                .data(dataset)
+                .enter()
+                .append("circle");
+            
+            circles.attr("cx", function(d,i){
+                return (i * 50) + 25;
+                })
+                .attr("cy", h/2)
+                .attr("r", function(d) {
+                    return d;
+                })
+                .attr("fill", "yellow")
+                .attr("stroke", "orange")
+                .attr("stroke-width", function(d){
+                    return d/2;
+                });
+            //New bar chart
+            d3.select("body").append("p").text("New bar chart using svg")
+            var w_chart = 500;
+            var h_chart = 100;
+            var barPadding = 1;
+            //Dataset for new chart
+            var dataset2 = [ 5, 10, 13, 19, 21, 25, 22, 18, 15, 13, 11, 12, 15, 20, 18, 17, 16, 18, 23, 25 ];
+            //Create SVG element
+            var svg = d3.select("body")
+                .append("svg")
+                .attr("width",w_chart)
+                .attr("height", h_chart);
+            
+            svg.selectAll("rect")
+                .data(dataset2)
+                .enter()
+                .append("rect")
+                .attr({
+                x: function(d,i){ return i * (w_chart/dataset2.length);},
+                y: function(d) {return h_chart - (d * 4);},
+                width: w/ dataset2.length - barPadding,
+                height: function(d) {return d * 4;},
+                fill: function(d){return "rgb(0, 120, "+( d * 10 )+")";}
+            });
+            
+            //Adding text to the bar chart
+            svg.selectAll("text")
+                .data(dataset2)
+                .enter()
+                .append("text")
+                .text(function(d){
+                return d;
+                })
+                .attr({
+                x: function(d,i){return i * (w_chart/dataset2.length)+ (w_chart/dataset2.length - barPadding)/2;},
+                y: function(d){return h_chart - (d*4)+14;},
+                "font-family": "sans-serif",
+                "font-size": "11px",
+                "fill": "white",
+                "text-anchor": "middle"
+            });
+            d3.select("body")
+                .append("p")
+                .text("Making scatter plot")
+            //Declare dataset
+            var dataset = [
+                                [ 5,    20 ],
+                                [ 480,  90 ],
+                                [ 250,   50 ],
+                                [ 100,   33 ],
+                                [ 330,   95 ],
+                                [ 410,   12 ],
+                                [ 475,   44 ],
+                                [ 25,    67 ],
+                                [ 85,    21 ],
+                                [ 220,   88 ]
+            ];
+            //Same dimension as svg bar chart
+            var w = 500;
+            var h = 100;
+            var svg = d3.select("body")
+                .append("svg")
+                .attr({
+                    "width": w,
+                    "height": h
+                });
+            //Making circle for each datapoint
+            svg.selectAll("circle")
+                .data(dataset)
+                .enter()
+                .append("circle")
+                .attr({
+                "cx": function(d){ return d[0];},
+                "cy": function(d){ return d[1];},
+                "r": function(d) {return Math.sqrt(h - d[1]);},
+                "fill": "#8BC34A"
+            });
+            
+            //Making labels
+            svg.selectAll("text")
+                .data(dataset)
+                .enter()
+                .append("text")
+                .text(function(d){
+                return d[0] + "," + d[1];
+                })
+                .attr({
+                "x": function(d){return d[0];},
+                "y": function(d){return d[1];},
+                "font-family": "sans-serif",
+                "font-size": "11px",
+                "fill": "#E040FB"
+            });
+        </script>
+    </body>
+</html>

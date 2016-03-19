@@ -1,0 +1,97 @@
+p {
+    font-family: sans-serif;
+    font-size: 24pt;
+    font-weight: bold;
+}
+div.bar {
+    display: inline-block;
+    width: 20px;
+    height: 75px;
+    background-color: teal;
+    margin-right: 2px;
+}
+
+/*CSS for navbar */
+ul.navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #9B26AF;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    box-shadow: 0 7px 6px -7px black;
+}
+li.navbar, li.navbar ~ li{
+    float: left;
+}
+.navbar a {
+    display: block;
+    color: white;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+.navbar a:hover{
+    background-color: #691A99;
+    border-bottom: 3px solid #691A99;
+    color: white;
+}
+.navbar .active {
+    border-bottom: 3px solid #68EFAD;
+    color: white;
+}
+
+/*CSS for html list */
+ul.htmlNavBar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    width: 25%;
+    background-color: lightgray;
+    height: 100%; /* Full height */
+    position: absolute;
+    overflow: auto; /* Enable scrolling if the sidenav has too much content */
+    box-shadow: inset 0 0 10px #000000;
+}
+.part a {
+    display: block;
+    font-family: ;
+    color: white;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+.part a:hover {
+    background-color: gray;
+    border-right: 3px solid "lightgray";
+    box-shadow: inset 0 0 10px #000000;
+}
+.part.Active a{
+    background-color: gray;
+    box-shadow: inset 0 0 10px #000000;
+}
+body {
+    padding-top: 41px;
+    padding-left: 25%;
+}
+
+/*Shadow for scatter point text */
+text.shadow {
+    text-shadow: 1px 1px black;
+    font-family: sans-serif;
+    font-size: 11px;
+    fill: pink;
+}
+/*CSS for scatter axis*/
+.axis path, .axis line{
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}
+
+.axis text{
+    font-family: sans-serif;
+    font-size: 11px;
+}
